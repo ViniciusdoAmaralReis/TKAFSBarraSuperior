@@ -42,7 +42,7 @@ begin
   with BtnOpcoes do
   begin
     Align := TAlignLayout.MostRight;
-    LabDescricao.Text := '⚙';
+    LabDescricao.Text := '🔧';
     Width := Self.Height;
   end;
 end;
