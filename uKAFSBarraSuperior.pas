@@ -20,7 +20,7 @@ type
 implementation
 
 uses
-  UntKAFSJanelaLogin, UntKAFSJanelaOpcoes;
+  uKAFSJanelaLogin, uKAFSJanelaOpcoes;
 
 constructor TKAFSBarraSuperior.Create(AOwner: TComponent);
 begin
