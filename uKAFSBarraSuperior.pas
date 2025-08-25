@@ -5,7 +5,7 @@ interface
 uses
   System.Classes, System.SysUtils, System.UITypes,
   FMX.Graphics, FMX.Layouts, FMX.Types,
-  UntKAFSBotao;
+  uKAFSBotao;
 
 type
   TKAFSBarraSuperior = class(TLayout)
