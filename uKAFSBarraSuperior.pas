@@ -9,8 +9,8 @@ uses
 
 type
   TKAFSBarraSuperior = class(TLayout)
-    BtnUsuario: TKAFSBotao;
-    BtnOpcoes: TKAFSBotao;
+    btnUsuario: TKAFSBotao;
+    btnOpcoes: TKAFSBotao;
 
     constructor Create(AOwner: TComponent); override;
     procedure KAFSBarraSuperiorConfig(const _cortema1, _cortema2: TAlphaColor; _imagemusuario: TBitmap; _btnusuario, _btnopcoes: TNotifyEvent);
@@ -31,15 +31,15 @@ begin
   Margins.Bottom := -Height;
   Parent := TFmxObject(AOwner);
 
-  BtnUsuario := TKAFSBotao.Create(Self);
-  with BtnUsuario do
+  btnUsuario := TKAFSBotao.Create(Self);
+  with btnUsuario do
   begin
     Align := TAlignLayout.MostLeft;
     Width := Self.Height;
   end;
 
-  BtnOpcoes := TKAFSBotao.Create(Self);
-  with BtnOpcoes do
+  btnOpcoes := TKAFSBotao.Create(Self);
+  with btnOpcoes do
   begin
     Align := TAlignLayout.MostRight;
     LabDescricao.Text := '🔧';
@@ -52,21 +52,21 @@ begin
   // Atualiza componentes visuais
   TThread.Synchronize(nil, procedure
   begin
-    with BtnUsuario do
+    with btnUsuario do
     begin
       Fill.Color := _cortema2;
-      ImgImagem.Bitmap := _imagemusuario;
-      LabDescricao.FontColor := _cortema1;
+      imgImagem.Bitmap := _imagemusuario;
+      labDescricao.FontColor := _cortema1;
 
-      OnClick := _btnusuario;
+      btnBotao.OnClick := _btnusuario;
     end;
 
-    with BtnOpcoes do
+    with btnOpcoes do
     begin
       Fill.Color := _cortema2;
-      LabDescricao.FontColor := _cortema1;
+      labDescricao.FontColor := _cortema1;
 
-      OnClick := _btnopcoes;
+      btnBotao.OnClick := _btnopcoes;
     end;
 
     Visible := True;
@@ -75,11 +75,11 @@ end;
 
 destructor TKAFSBarraSuperior.Destroy;
 begin
-  if Assigned(BtnOpcoes) then
-    FreeAndNil(BtnOpcoes);
+  if Assigned(btnOpcoes) then
+    FreeAndNil(btnOpcoes);
 
-  if Assigned(BtnUsuario) then
-    FreeAndNil(BtnUsuario);
+  if Assigned(btnUsuario) then
+    FreeAndNil(btnUsuario);
 
   inherited Destroy;
 end;
