@@ -12,7 +12,7 @@ type
     btnUsuario: TKAFSBotao;
     btnOpcoes: TKAFSBotao;
 
-    constructor Create(AOwner: TComponent); override;
+    constructor Create(AOwner: TComponent); reintroduce;
     procedure KAFSBarraSuperiorConfig(const _cortema1, _cortema2: TAlphaColor; _imagemusuario: TBitmap; _btnusuario, _btnopcoes: TNotifyEvent);
     destructor Destroy; override;
   end;
@@ -75,11 +75,6 @@ end;
 
 destructor TKAFSBarraSuperior.Destroy;
 begin
-  if Assigned(btnOpcoes) then
-    FreeAndNil(btnOpcoes);
-
-  if Assigned(btnUsuario) then
-    FreeAndNil(btnUsuario);
 
   inherited Destroy;
 end;
