@@ -27,7 +27,7 @@ begin
   inherited Create(AOwner);
 
   Align := TAlignLayout.MostTop;
-  Height := 70;
+  Height := 50;
   Margins.Bottom := -Height;
   Parent := TFmxObject(AOwner);
 
