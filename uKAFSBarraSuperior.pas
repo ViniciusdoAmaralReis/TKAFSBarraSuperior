@@ -3,17 +3,17 @@
 interface
 
 uses
-  System.Classes, System.SysUtils, System.UITypes,
-  FMX.Graphics, FMX.Layouts, FMX.Types,
+  System.Classes, System.UITypes,
+  FMX.Graphics, FMX.Objects, FMX.Types,
   uKAFSBotao;
 
 type
-  TKAFSBarraSuperior = class(TLayout)
+  TKAFSBarraSuperior = class(TRectangle)
     btnUsuario: TKAFSBotao;
     btnOpcoes: TKAFSBotao;
 
     constructor Create(AOwner: TComponent); reintroduce;
-    procedure KAFSBarraSuperiorConfig(const _cortema1, _cortema2: TAlphaColor; _imagemusuario: TBitmap; _btnusuario, _btnopcoes: TNotifyEvent);
+    procedure KAFSBarraSuperiorConfig(const _cortema1, _cortema2: TAlphaColor; const _imgUsuario, _imgConfig: TBitmap; const _btnUsuario, _btnOpcoes: TNotifyEvent);
     destructor Destroy; override;
   end;
 
@@ -26,50 +26,66 @@ constructor TKAFSBarraSuperior.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
-  Align := TAlignLayout.MostTop;
-  Height := 50;
-  Margins.Bottom := -Height;
-  Parent := TFmxObject(AOwner);
+  Self.Align := TAlignLayout.MostTop;
+  Self.Corners := [TCorner.BottomLeft, TCorner.BottomRight];
+  Self.Height := 50;
+  Self.Margins.Bottom := -Height;
+  Self.Parent := TFmxObject(AOwner);
+  Self.Stroke.Kind := TBrushKind.None;
+  Self.Visible := False;
+  Self.XRadius := 25;
+  Self.YRadius := 25;
 
   btnUsuario := TKAFSBotao.Create(Self);
-  with btnUsuario do
-  begin
-    Align := TAlignLayout.MostLeft;
-    Width := Self.Height;
-  end;
+  btnUsuario.Align := TAlignLayout.MostLeft;
+  btnUsuario.Fill.Color := TAlphaColors.White;
+  btnUsuario.Height := 100;
+  btnUsuario.imgImagem.Margins.Bottom := 20;
+  btnUsuario.imgImagem.Margins.Left := 20;
+  btnUsuario.imgImagem.Margins.Right := 20;
+  btnUsuario.imgImagem.Margins.Top := 20;
+  btnUsuario.Margins.Bottom := -60;
+  btnUsuario.Margins.Left := 25;
+  btnUsuario.Margins.Top := 10;
+  btnUsuario.Stroke.Color := TAlphaColors.Null;
+  btnUsuario.Stroke.Kind := TBrushKind.Solid;
+  btnUsuario.Stroke.Thickness := 10;
+  btnUsuario.Width := 100;
+  btnUsuario.XRadius := 25;
+  btnUsuario.YRadius := 25;
 
   btnOpcoes := TKAFSBotao.Create(Self);
-  with btnOpcoes do
-  begin
-    Align := TAlignLayout.MostRight;
-    LabDescricao.Text := '🔧';
-    Width := Self.Height;
-  end;
+  btnOpcoes.Align := TAlignLayout.MostRight;
+  btnOpcoes.Fill.Color := TAlphaColors.White;
+  btnOpcoes.Height := 100;
+  btnOpcoes.imgImagem.Margins.Bottom := 20;
+  btnOpcoes.imgImagem.Margins.Left := 20;
+  btnOpcoes.imgImagem.Margins.Right := 20;
+  btnOpcoes.imgImagem.Margins.Top := 20;
+  btnOpcoes.Margins.Bottom := -60;
+  btnOpcoes.Margins.Right := 25;
+  btnOpcoes.Margins.Top := 10;
+  btnOpcoes.Stroke.Color := TAlphaColors.Null;
+  btnOpcoes.Stroke.Kind := TBrushKind.Solid;
+  btnOpcoes.Stroke.Thickness := 10;
+  btnOpcoes.Width := 100;
+  btnOpcoes.XRadius := 25;
+  btnOpcoes.YRadius := 25;
 end;
 
-procedure TKAFSBarraSuperior.KAFSBarraSuperiorConfig(const _cortema1, _cortema2: TAlphaColor; _imagemusuario: TBitmap; _btnusuario, _btnopcoes: TNotifyEvent);
+procedure TKAFSBarraSuperior.KAFSBarraSuperiorConfig(const _cortema1, _cortema2: TAlphaColor; const _imgUsuario, _imgConfig: TBitmap; const _btnUsuario, _btnOpcoes: TNotifyEvent);
 begin
-  // Atualiza componentes visuais
   TThread.Synchronize(nil, procedure
   begin
-    with btnUsuario do
-    begin
-      Fill.Color := _cortema2;
-      imgImagem.Bitmap := _imagemusuario;
-      labDescricao.FontColor := _cortema1;
+    Self.Fill.Color := _cortema2;
 
-      btnBotao.OnClick := _btnusuario;
-    end;
+    btnUsuario.btnBotao.OnClick := _btnUsuario;
+    btnUsuario.imgImagem.Bitmap := _imgUsuario;
 
-    with btnOpcoes do
-    begin
-      Fill.Color := _cortema2;
-      labDescricao.FontColor := _cortema1;
+    btnOpcoes.btnBotao.OnClick := _btnopcoes;
+    btnOpcoes.imgImagem.Bitmap := _imgConfig;
 
-      btnBotao.OnClick := _btnopcoes;
-    end;
-
-    Visible := True;
+    Self.Visible := True;
   end);
 end;
 
